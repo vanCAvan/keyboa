@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal - Game Menu</title>
+    <!-- FontAwesome (versi gratis) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- =========================================================
+         BACKGROUND VIDEO
+         File: bg.mp4 (muted + autoplay supaya boleh jalan otomatis).
+         Mau ganti video? Cukup timpa file bg.mp4 atau ubah src di bawah.
+    ========================================================== -->
+    <video class="bg-video" autoplay muted loop playsinline preload="auto">
+        <source src="bg.mp4" type="video/mp4">
+    </video>
+
+    <!-- =========================================================
+         HALAMAN LOGIN
+         Tampil pertama kali, dan setiap kali pengguna menekan
+         tombol X atau Keluar (Power).
+    ========================================================== -->
+    <main class="login-page" id="view-login">
+        <form class="login-card" id="login-form" novalidate>
+            <div class="header-title">
+                <i class="fa-solid fa-diamond"></i>
+                <span>Terminal</span>
+            </div>
+
+            <div class="avatar-box login-avatar">
+                <img class="avatar-img" alt="Avatar" src="avatar.png">
+            </div>
+
+            <div class="login-text">
+                <h1>Selamat datang</h1>
+                <p>Masuk untuk melanjutkan ke menu.</p>
+            </div>
+
+            <div class="field">
+                <label for="login-user">Username</label>
+                <div class="input-wrap">
+                    <i class="fa-regular fa-user"></i>
+                    <input id="login-user" type="text" autocomplete="username" placeholder="Masukkan username">
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="login-pass">Password</label>
+                <div class="input-wrap">
+                    <i class="fa-solid fa-lock"></i>
+                    <input id="login-pass" type="password" autocomplete="current-password" placeholder="Masukkan password">
+                    <button type="button" class="toggle-pass" id="toggle-pass" aria-label="Tampilkan password">
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <p class="login-error" id="login-error" role="alert"></p>
+
+            <button type="submit" class="login-btn">Masuk</button>
+
+            <p class="login-hint">Akun demo: <b>Cavandish</b> / <b>123456</b></p>
+        </form>
+    </main>
+
+    <div class="menu-container" hidden>
+
+        <!-- Tombol X (keluar) -->
+        <button class="close-btn" id="btn-close" aria-label="Keluar"><i class="fa-solid fa-xmark"></i></button>
+
+        <!-- =====================================================
+             TAMPILAN 1: HOME (profil + grid menu)
+        ====================================================== -->
+        <section class="view view-home active" id="view-home">
+
+            <!-- KIRI: PROFIL -->
+            <aside class="profile-section">
+                <div class="header-title">
+                    <i class="fa-solid fa-diamond"></i>
+                    <span>Terminal</span>
+                </div>
+
+                <div class="avatar-box">
+                    <!-- Avatar: ganti file avatar.png untuk mengubahnya -->
+                    <img class="avatar-img" alt="Avatar" src="avatar.png">
+                </div>
+
+                <div class="user-name">
+                    <span>Cavandish</span>
+                    <button class="edit-icon" data-modal="Edit Nama|Masukkan nama baru untuk karaktermu." aria-label="Edit nama">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+                </div>
+                <div class="user-id">User ID: 705261645</div>
+
+                <div class="character-tag">Shorekeeper</div>
+
+                <div class="stats-list">
+                    <div class="stat-item"><span>Birthday</span><span class="val">May 13</span></div>
+                    <div class="stat-item"><span>SOL3 Phase</span><span class="val">Rank 8</span></div>
+                    <div class="stat-item"><span>Union Level</span><span class="val">80</span></div>
+                </div>
+
+                <div class="exp-bar-container">
+                    <div class="stat-item">
+                        <span>Union EXP</span>
+                        <span class="val">561380/9999999</span>
+                    </div>
+                    <div class="exp-bar">
+                        <!-- 561380 / 9999999 = sekitar 5.6% -->
+                        <div class="exp-fill" style="width: 5.6%"></div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- KANAN: 15 MENU UTAMA. data-screen = kunci layar di script.js -->
+            <div class="main-content">
+                <div class="buttons-grid">
+                    <button class="menu-btn" data-screen="events">
+                        <span class="badge"></span>
+                        <i class="fa-solid fa-wand-magic-sparkles"></i><span>Events</span>
+                    </button>
+                    <button class="menu-btn" data-screen="toko">
+                        <i class="fa-solid fa-cart-shopping"></i><span>Toko</span>
+                    </button>
+                    <button class="menu-btn" data-screen="musik">
+                        <i class="fa-solid fa-compact-disc"></i><span>Musik</span>
+                    </button>
+                    <button class="menu-btn" data-screen="crafting">
+                        <i class="fa-solid fa-compass-drafting"></i><span>Crafting</span>
+                    </button>
+                    <button class="menu-btn" data-screen="karakter">
+                        <i class="fa-solid fa-user-ninja"></i><span>Karakter</span>
+                    </button>
+
+                    <button class="menu-btn" data-screen="strategi">
+                        <i class="fa-solid fa-chess-king"></i><span>Strategi</span>
+                    </button>
+                    <button class="menu-btn" data-screen="inventory">
+                        <span class="badge"></span>
+                        <i class="fa-solid fa-database"></i><span>Inventory</span>
+                    </button>
+                    <button class="menu-btn" data-screen="obrolan">
+                        <i class="fa-solid fa-comment-dots"></i><span>Obrolan</span>
+                    </button>
+                    <button class="menu-btn" data-screen="quest">
+                        <i class="fa-solid fa-book-open"></i><span>Quest Log</span>
+                    </button>
+                    <button class="menu-btn" data-screen="skill">
+                        <i class="fa-solid fa-atom"></i><span>Skill</span>
+                    </button>
+
+                    <button class="menu-btn" data-screen="kendaraan">
+                        <i class="fa-solid fa-motorcycle"></i><span>Kendaraan</span>
+                    </button>
+                    <button class="menu-btn" data-screen="pencapaian">
+                        <i class="fa-solid fa-trophy"></i><span>Pencapaian</span>
+                    </button>
+                    <button class="menu-btn" data-screen="guild">
+                        <i class="fa-solid fa-handshake"></i><span>Guild</span>
+                    </button>
+                    <button class="menu-btn" data-screen="koleksi">
+                        <i class="fa-solid fa-layer-group"></i><span>Koleksi</span>
+                    </button>
+                    <button class="menu-btn" data-screen="peta">
+                        <i class="fa-solid fa-compass"></i><span>Peta Dunia</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             TAMPILAN 2: LAYAR MENU (diisi otomatis oleh script.js)
+        ====================================================== -->
+        <section class="view view-screen" id="view-screen" aria-live="polite">
+            <header class="screen-header">
+                <button class="back-btn" id="btn-back">
+                    <i class="fa-solid fa-chevron-left"></i><span>Kembali</span>
+                </button>
+                <div class="screen-title">
+                    <i id="screen-icon" class="fa-solid fa-diamond"></i>
+                    <div>
+                        <h2 id="screen-name">Judul</h2>
+                        <p id="screen-desc">Deskripsi</p>
+                    </div>
+                </div>
+            </header>
+            <div class="screen-body" id="screen-body"></div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="bottom-bar">
+            <button class="power-btn" id="btn-power" aria-label="Power menu"><i class="fa-solid fa-power-off"></i></button>
+            <div class="footer-icons">
+                <button class="footer-icon-btn" data-screen="mail" aria-label="Mail"><i class="fa-regular fa-envelope"></i></button>
+                <button class="footer-icon-btn" data-screen="clock" aria-label="Clock"><i class="fa-regular fa-clock"></i></button>
+                <button class="footer-icon-btn" data-screen="notices" aria-label="Notices"><i class="fa-regular fa-clipboard"></i></button>
+                <button class="footer-icon-btn" data-screen="camera" aria-label="Camera"><i class="fa-solid fa-camera"></i></button>
+                <button class="footer-icon-btn" data-screen="settings" aria-label="Settings"><i class="fa-solid fa-gear"></i></button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- POP-UP (dipakai untuk konfirmasi, mis. Keluar / Edit Nama) -->
+    <div id="modal-overlay" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <div class="modal-header">
+                <h3 id="modal-title">Judul</h3>
+                <button class="modal-close" id="modal-x" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body"><p id="modal-text"></p></div>
+            <div class="modal-footer">
+                <button class="action-btn" id="modal-ok">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
